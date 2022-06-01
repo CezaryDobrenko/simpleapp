@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block title %}Strony WWW{% endblock %}
+{% block custom_styles %}
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'assets/css/style_responsive_table.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/style_custom_buttons.css' %}">
+{% endblock %}
+{% block content %}
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <div style="margin-bottom: 60px;">
+          <h2 style="color: black;">Zdefiniowane strony interetowe:</h2>
+        </div>
+        <div style="overflow-x:auto;">
+            <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th> id </th>
+                    <th> Adres WWW </th>
+                    <th> Opis </th>
+                    <th> Czy aktywny </th>
+                    <th> Folder </th>
+                    <th> Konfiguracja </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% if object_list %}
+                    {% for website in object_list %}
+                        <tr style="margin-bottom:40px;">
+                            <td data-label="ID"> {{ website.pk }} </td>
+                            <td data-label="Adres WWW"> 
+                              {% if website.is_valid_with_robots == False %}
+                                <i class="mdi mdi-alert" style="margin-left: 10px; font-size: 25px; color: #0062ff;" 
+                                title="Wybrana strona została zabroniona dla procesu pobierania danych przez plik robots.txt! Pobieranie danych z tej strony jest dalej możliwe, ale prosimy o rozważenie usunięcia jej z procesu pobierania danych.">
+                                </i>
+                              {% endif %}
+                              {{ website.url }} 
+                            </td>
+                            <td data-label="Opis"> {{ website.description }} </td>
+                            <td data-label="Czy aktywny"> {{ website.is_ready }} </td>
+                            <td data-label="Folder">
+                              <a href="{% url 'websites-settings' pk=website.folder_id %}">
+                                <span class="icon-bg">
+                                  <i class="mdi mdi-folder" style="font-size: 25px; color: #0062ff;"></i>
+                                  <span style="color: black;">Przejdź do folderu</span>
+                                </span>
+                              </a>
+                            </td>
+                            <td data-label="Konfiguracja">
+                              <a href="{% url 'selectors-list' pk=website.pk %}">
+                                <span class="icon-bg">
+                                  <i class="mdi mdi-settings" style="font-size: 25px; color: #0062ff;"></i>
+                                  <span style="color: black;">Przejdź do konfiguracji</span>
+                                </span>
+                              </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                  {% else %}
+                  <tr>
+                    <td>
+                      Brak stron internetowych
+                    </td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                  </tr>
+                  {% endif %}
+                </tbody>
+              </table>
+        </div>
+        {% include "pagination.html" %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% block title %}Potwiedź poprawność{% endblock %}
+{% block content %}
+<div class="row">       
+    <div class="col-md-4 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">KROK 1 (Konfiguracja)</h4>
+          <div class="media">
+            <i class="mdi mdi-earth icon-md d-flex align-self-center mr-3"></i>
+            <div class="media-body">
+              <p class="card-text" style="color: black;">
+                Dodaj strony www za pośrednictwem adresu url. 
+                Określ czy strona jest gotowa do pobierania za pomocą statusu aktywności.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">KROK 2 (Konfiguracja)</h4>
+          <div class="media">
+            <i class="mdi mdi-cursor-default icon-md d-flex align-self-end mr-3"></i>
+            <div class="media-body">
+              <p class="card-text" style="color: black;">
+                Wybierz selektory za pośrednictwem graficznego interface użytkownika, lub
+                dodaj z poziomu formularza systemowego.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">KROK 3 (Weryfikacja poprawności)</h4>
+          <div class="media">
+            <i class="mdi mdi-check icon-md text-success d-flex align-self-end mr-3"></i>
+            <div class="media-body">
+              <p class="card-text" style="color: black;">
+                Sprawdź, czy wszystkie dane zostały podane poprawnie. 
+                Następnie przejdź do widoku folderów i dokończ proces zbierania danych.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="row">
+        <div class="col-md-8 grid-margin stretch-card">
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-12">
+
+
+                    <div class="card">
+                        <div class="card-body">
+                          <h4 class="card-title">Konfiguracja strony internetowej:</h4>
+                          <ul>
+                            <li style="color: black;">Identyfikator: {{ website_data.id }}</li>
+                            <li style="color: black;">Adres WWW: {{ website_data.url }}</li>
+                            <li style="color: black;">Opis: {{ website_data.description }}</li>
+                          </ul>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                          <h4 class="card-title">Konfiguracja selektorów:</h4>
+                          {% for selector_data in selectors_data %}
+                            <hr>
+                            <ul>
+                                <li style="color: black;">Wartość: {{ selector_data.value }}</li>
+                                <li style="color: black;">Opis: {{ selector_data.desc }}</li>
+                                <li style="color: black;">Typ: {{ selector_data.type }}</li>
+                            </ul>
+                          {% endfor %}
+                        </div>
+                    </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 grid-margin stretch-card">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">Akcje</h4>
+              <div class="template-demo">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="control mt-5">
+                        <input type="submit" class="btn btn-success btn-lg btn-block" value="OK" style="min-width: 170px;">
+                        <a class="btn btn-primary btn-lg btn-block" href="{% url 'selectors-list' pk=website_data.id %}" style="min-width: 170px;">Powrót</a>
+                    </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+{% endblock %}

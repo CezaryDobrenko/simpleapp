@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}Edytuj stronę WWW{% endblock %}
+{% block content %}
+<div class="card-body">
+    <h4 class="card-title" style="color: black;">Formularz edycji</h4>
+    <br>
+    {{ form.media }}
+    <form class="forms-sample" action="" method="post">
+        {% csrf_token %}
+        <div class="form-group" style="font-size: 16px;">
+            <label class="label" for="id_timezone" style="color: black; font-size: 14px;">Wybierz strefę czasową</label>
+            <select name="timezone" class="form-control" id="id_timezone" style="font-size: 13px;">
+                {% for timezone in timezones %}
+                    {% if timezone.id == current_timezone.id %}
+                        {% if timezone.value > 0 %}
+                            <option value="{{timezone.id}}" selected style="font-size: 13px;">{{timezone.name}} -> UTC +{{timezone.value}}</option>
+                        {% else %}
+                            <option value="{{timezone.id}}" selected style="font-size: 13px;">{{timezone.name}} -> UTC {{timezone.value}}</option>
+                        {% endif %}
+                    {% else %}
+                        {% if timezone.value > 0 %}
+                            <option value="{{timezone.id}}" style="font-size: 13px;">{{timezone.name}} -> UTC +{{timezone.value}}</option>
+                        {% else %}
+                            <option value="{{timezone.id}}" style="font-size: 13px;">{{timezone.name}} -> UTC {{timezone.value}}</option>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </select>     
+        </div>
+        <input type="submit" class="btn btn-primary mr-2" value="Zapisz">
+        <a class="btn btn-light" href="{{ view.get_success_url }}">Powrót</a>
+    </form>
+</div>
+{% endblock %}

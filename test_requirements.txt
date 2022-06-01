@@ -1,0 +1,8 @@
+-r requirements.txt
+click==8.0.1
+black==21.7b0
+flake8==3.9.2
+isort==5.9.3
+pytest-django==3.9.0
+pre-commit==2.14.0
+coverage==6.3.2

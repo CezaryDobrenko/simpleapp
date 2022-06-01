@@ -1,0 +1,12 @@
+.wcag-small{
+    display: none !important;
+}
+
+@media screen and (max-width: 520px) {
+    #big-wcag{
+        display: none !important;
+    }
+    .wcag-small{
+        display: block !important;
+    }
+}

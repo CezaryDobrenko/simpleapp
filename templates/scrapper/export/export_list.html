@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block title %}Foldery{% endblock %}
+{% block custom_styles %}
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'assets/css/style_responsive_table.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/style_custom_buttons.css' %}">
+{% endblock %}
+{% block content %}
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <div style="margin-bottom: 60px;">
+          <h2 style="color: black;">Eksport danych:</h2>
+        </div>
+        <div style="overflow-x:auto;">
+            <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th> id </th>
+                    <th> Nazwa </th>
+                    <th> Export do JSON </th>
+                    <th> Export do TXT </th>
+                    <th> Export do XML </th>
+                    <th> Export do CSV/EXCEL </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% if object_list %}
+                    {% for folder in object_list %}
+                          <tr style="margin-bottom:40px;">
+                            <td data-label="ID"> {{ folder.pk }} </td>
+                            <td data-label="Nazwa"> {{ folder.name }} </td>
+                            <td data-label="Export do JSON"> 
+                              <a href="{% url 'export-json' pk=folder.pk %}">
+                                <span class="icon-bg">
+                                  <i class="mdi mdi-file-export" style="font-size: 40px; color: #0062ff;"></i>
+                                  Pobierz
+                                </span>
+                              </a>
+                            </td>
+                            <td data-label="Export do TXT"> 
+                              <a href="{% url 'export-txt' pk=folder.pk %}">
+                                <span class="icon-bg">
+                                  <i class="mdi mdi-file-export" style="font-size: 40px; color: #0062ff;"></i>
+                                  Pobierz
+                                </span>
+                              </a>
+                            </td>
+                            <td data-label="Export do XML"> 
+                              <a href="{% url 'export-xml' pk=folder.pk %}">
+                                <span class="icon-bg">
+                                  <i class="mdi mdi-file-export" style="font-size: 40px; color: #0062ff;"></i>
+                                  Pobierz
+                                </span>
+                              </a>
+                            </td>
+                            <td data-label="Export do CSV"> 
+                              <a href="{% url 'export-csv' pk=folder.pk %}">
+                                <span class="icon-bg">
+                                  <i class="mdi mdi-file-export" style="font-size: 40px; color: #0062ff;"></i>
+                                  Pobierz
+                                </span>
+                              </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                  {% else %}
+                  <tr>
+                    <td>
+                      Brak danych do eksportu
+                    </td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                  </tr>
+                  {% endif %}
+                </tbody>
+            </table>
+        </div>
+        {% include "pagination.html" %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

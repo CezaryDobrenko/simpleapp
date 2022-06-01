@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% block title %}Panel główny{% endblock %}
+{% block content %}
+<div class="row">       
+    <div class="col-md-4 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Liczba folderów</h4>
+          <div class="media">
+            <i class="mdi mdi-star-circle text-success icon-md d-flex align-self-end mr-3">
+                <span style="font-size: 55px;">{{folders_count}}</span>
+            </i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Liczba stron interetowych</h4>
+          <div class="media">
+            <i class="mdi mdi-star-circle text-success icon-md d-flex align-self-end mr-3">
+                <span style="font-size: 55px;">{{websites_count}}</span>
+            </i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Liczba zebranych danych</h4>
+          <div class="media">
+            <i class="mdi mdi-star-circle text-success icon-md d-flex align-self-end mr-3">
+                <span style="font-size: 55px;">{{data_count}}</span>
+            </i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Funkcjonalności użytkownika</h4>
+          <div class="template-demo">
+            <h1 class="display-5" style="color: black;">1. Konfiguracja procesu pobierania danych</h1>
+            <h1 class="display-5" style="color: black;">2. Dostęp do kreatora pobierania danych</h1>
+            <h1 class="display-5" style="color: black;">3. Eksport pobranych danych</h1>
+            <h1 class="display-5" style="color: black;">4. Zarządzanie kluczami API</h1>
+            <h1 class="display-5" style="color: black;">5. Zarządzanie kontem</h1>
+          </div>
+          <br><br><br>
+          <h4 class="card-title">Strefa czasowa:</h4>
+          <div style="color: black; font-size: 22px;">{{timezone.name}}</div>
+          <br>
+          <a class="btn btn-block btn-primary" href="{% url 'change_timezone' pk=user.pk %}">Zmień</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 d-flex align-items-stretch">
+      <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">Data dołączenia</h4>
+              <div class="row">
+                <div class="col-md-4 d-flex align-items-center">
+                  <div class="d-flex flex-row align-items-center">
+                    <i class="mdi mdi-calendar icon-lg text-success"></i>
+                    <p class="mb-0 ml-1" style="font-size: 24px;"> {{ join_date }} </p>
+                  </div>
+                </div>
+              </div>
+              <br>
+              <p class="card-description" style="color: black"> Dodatkowa informacja </p>
+              <p style="color: black"> Podana data jest datą rejestracji, data aktywacji i faktycznego rozpoczęcia użytkownika może być późniejsza w zależności od procesu rejestracyjnego.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 grid-margin stretch-card">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">Status użytkownika</h4>
+              <div class="row">
+                <div class="col-md-4 d-flex align-items-center">
+                  <div class="d-flex flex-row align-items-center">
+                    <i class="mdi mdi-account-check icon-lg text-success"></i>
+                    <p class="mb-0 ml-1" style="font-size: 33px;"> Aktywny </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

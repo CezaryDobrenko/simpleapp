@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+{% block title %}Selektory{% endblock %}
+{% block custom_styles %}
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'assets/css/style_responsive_table.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/style_custom_buttons.css' %}">
+{% endblock %}
+{% block content %}
+<div class="row">       
+  <div class="col-md-4 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">KROK 1 (Konfiguracja)</h4>
+        <div class="media">
+          <i class="mdi mdi-earth icon-md d-flex align-self-center mr-3"></i>
+          <div class="media-body">
+            <p class="card-text" style="color: black;">
+              Dodaj strony www za pośrednictwem adresu url. 
+              Określ czy strona jest gotowa do pobierania za pomocą statusu aktywności.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">KROK 2 (Konfiguracja)</h4>
+        <div class="media">
+          <i class="mdi mdi-cursor-default icon-md text-success d-flex align-self-end mr-3"></i>
+          <div class="media-body">
+            <p class="card-text" style="color: black;">
+              Wybierz selektory za pośrednictwem graficznego interface użytkownika, lub
+              dodaj z poziomu formularza systemowego.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">KROK 3 (Weryfikacja poprawności)</h4>
+        <div class="media">
+          <i class="mdi mdi-check icon-md d-flex align-self-end mr-3"></i>
+          <div class="media-body">
+            <p class="card-text" style="color: black;">
+              Sprawdź, czy wszystkie dane zostały podane poprawnie. 
+              Następnie przejdź do widoku folderów i dokończ proces zbierania danych.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <div style="margin-bottom: 60px;">
+            <div class="dropdown pull-right">
+              <a href="{% url 'selectors_approve' pk=website_id %}" style="margin-left: 20px;">
+                <button type="button" class="btn btn-success btn-rounded btn-icon" style="margin-right: -10px;">
+                  <i class="mdi mdi-check" style="font-size: 22px;"></i>
+                </button>
+              </a>
+              <a href="{% url 'websites-settings' pk=return_id %}" style="margin-left: 20px;">
+                <button type="button" class="btn btn-primary btn-rounded btn-icon" style="margin-right: 15px;">
+                  <i class="mdi mdi-arrow-left-bold" style="font-size: 22px;"></i>
+                </button>
+              </a>
+              <button type="button" class="btn btn-light dropdown-toggle" id="dropdownMenuIconButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="mdi mdi-arrow-down-drop-circle" style="font-size: 22px;"></i>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuIconButton3" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 39px, 0px);">
+                <h6 class="dropdown-header"></h6>
+                <a style="color: black; font-size: 20px;" class="dropdown-item" href="{% url 'selectors-add' pk=website_id %}">
+                  <i style="color: #33c92d; font-size: 25px;" class="mdi mdi-plus-circle"></i> Dodaj nowy selektor
+                </a>
+                <hr>
+                <a style="color: black; font-size: 20px;" class="dropdown-item" href="{% url 'selectors-add-gui' pk=website_id %}">
+                  <i style="color: #33c92d; font-size: 25px;" class="mdi mdi-plus-circle"></i> Dodaj nowe selektory (GUI)
+                </a>
+                <hr>
+                <a style="color: black; font-size: 20px;" class="dropdown-item" href="{% url 'selectors-clear' pk=website_id %}">
+                  <i style="color: #33c92d; font-size: 25px;" class="mdi mdi-delete"></i> Wyczyść wszystkie selektory
+                </a>
+              </div>
+            </div>
+        </div>
+        <div style="margin-bottom: 60px;">
+          <h2 style="color: black;">Zdefiniowane selektory:</h2>
+        </div>
+        <div style="overflow-x:auto;">
+            <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th> ID </th>
+                    <th> Typ </th>
+                    <th> Wartość </th>
+                    <th> Opis </th>
+                    <th> Ilość danych </th>
+                    <th> Zebrane dane </th>
+                    <th> Akcje</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% if object_list %}
+                    {% for selector in object_list %}
+                        <tr style="margin-bottom:40px;">
+                            <td data-label="ID"> {{ selector.pk }} </td>
+                            <td data-label="Typ"> {{ selector.type }} </td>
+                            <td data-label="Wartość"> {{ selector.value }} </td>
+                            <td data-label="Opis"> {{ selector.description }} </td>
+                            <td data-label="Ilość danych"> {{ selector.data_count }} </td>
+                            <td data-label="Zebrane dane"> 
+                              <a href="{% url 'collected-data-list' pk=selector.pk %}">
+                                <span class="icon-bg">
+                                  <i class="mdi mdi-magnify" style="margin-left: 10px; font-size: 25px; color: #0062ff;"></i>
+                                  <b>Podgląd</b>
+                                </span>
+                              </a>
+                            </td>
+                            <td class="responsive-length" data-label="Akcje"> 
+                                <a href="{% url 'selectors-update' pk=selector.pk %}">
+                                  <span class="icon-bg">
+                                    <i class="mdi mdi-lead-pencil" style="margin-left: 10px; font-size: 25px; color: #0062ff;"></i>
+                                  </span>
+                                </a>
+                                <a href="{% url 'selectors-delete' pk=selector.pk %}">
+                                  <span class="icon-bg">
+                                    <i class="mdi mdi-delete" style="margin-left: 10px; font-size: 25px; color: #0062ff;"></i>
+                                  </span>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                  {% else %}
+                  <tr>
+                    <td>
+                      Brak selektorów
+                    </td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                  </tr>
+                  {% endif %}
+                </tbody>
+              </table>
+        </div>
+        {% include "pagination.html" %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

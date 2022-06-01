@@ -1,0 +1,86 @@
+{% if is_paginated %}
+    <div class="row">
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                {% if request.GET.filter %}
+                <a href="?page={{ paginator.page_range|first }}" class="btn btn-primary custom_button_left">
+                  {{ paginator.page_range|first }}
+                </a>
+              {% else %}
+                <a href="?page={{ paginator.page_range|first }}" class="btn btn-primary custom_button_left">
+                  {{ paginator.page_range|first }}
+                </a>
+              {% endif %}
+        
+              <span class="btn btn-primary disabled custom_button_left responsive_span">&hellip;</span>
+        
+        
+              {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-primary custom_button_left">
+                    {{ page_obj.previous_page_number }}
+                </a>
+              {% else %}
+                <a class="btn btn-primary disabled custom_button_left">
+                    X
+                </a>
+              {% endif %}
+        
+        
+              <form method="GET" id = "page_form" class="custom_button_left">
+                <input id ="page" type="text" name="page" class="pagination-link is-current" style="width:40px; height: 38px; margin-right: 5px; text-align: center;">
+              </form>
+        
+        
+              {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="btn btn-primary custom_button_left">
+                    {{ page_obj.next_page_number }}
+                </a>
+              {% else %}
+                <a class="btn btn-primary disabled custom_button_left">
+                X
+                </a>
+              {% endif %}
+        
+        
+              {# separator element #}
+              <span class="btn btn-primary disabled custom_button_left responsive_span">&hellip;</span>
+        
+        
+              {# last element #}
+              <a href="?page={{ paginator.page_range|last }}" class="btn btn-primary custom_button_left">
+                {{ paginator.page_range|last }}
+              </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 grid-margin stretch-card card-resposive">
+            <div class="card-body responsive_pagination_right">
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}" class="btn btn-primary custom_button_right">
+                      >>
+                    </a>
+                {% else %}
+                    <a class="btn btn-primary disabled custom_button_right">
+                      >>
+                    </a>
+                {% endif %}
+
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-primary custom_button_right">
+                      <<
+                    </a>
+                {% else %}
+                    <a class="btn btn-primary disabled custom_button_right">
+                      <<
+                    </a>
+                {% endif %}
+            </div>
+          </div>
+    </div>
+    
+  {% load static %}
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="{% static 'assets/js/pagination.js' %}">
+  <script>$('#page').val({{ page_obj.number }});</script>
+{% endif %}

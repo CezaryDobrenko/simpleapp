@@ -1,0 +1,349 @@
+{% extends 'base.html' %}
+{% block title %}Dodaj selektory GUI{% endblock %}
+{% block custom_styles %}
+  <style>
+    @media screen and (max-width: 1450px) {
+        table {
+            border: 0;
+        }
+
+        table caption {
+            font-size: 1.3em;
+        }
+        
+        table thead {
+            border: none;
+            clip: rect(0 0 0 0);
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            width: 1px;
+        }
+        
+        table tr {
+            margin-top: 10px;
+            border-bottom: 3px solid #ddd;
+            display: block;
+            margin-bottom: .625em;
+        }
+        
+        table td {
+            border-bottom: 1px solid #ddd;
+            display: block;
+            font-size: .8em;
+            text-align: right;
+        }
+        
+        table td::before {
+            content: attr(data-label);
+            float: left;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .table th, .table td {
+            white-space: normal;
+        }
+        
+        table td:last-child {
+            border-bottom: 0;
+        }
+    }
+
+    .responsive-length{
+        width: 50px;
+    }
+
+    @media screen and (max-width: 730px) {
+        .responsive-length{
+            width: 100%;
+        }
+    }
+
+    #loading {
+      position: fixed;
+      display: block;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      text-align: center;
+      opacity: 0.7;
+      background-color: #fff;
+      z-index: 99;
+    }
+
+    #loading-image {
+      position: absolute;
+      top: 100px;
+      left: 35%;
+      width: 35%;
+      z-index: 100;
+    }
+  </style>
+{% endblock %}
+{% block content %}
+
+
+
+    {% load static %}
+    <div id="loading">
+      <img id="loading-image" src="{% static 'assets/images/loader.gif' %}" alt="Loading..." />
+    </div>
+    <script>
+      window.onload = function() {
+        document.getElementById("loading").style.display = "none";
+      };
+    </script>
+
+
+
+    <div class="row">
+        <div class="col-md-8 grid-margin stretch-card">
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-12">
+
+
+                    <div class="card">
+                        <div class="card-body">
+                          <h4 class="card-title">Uproszczony widok strony:</h4>
+                          <button type="button" class="btn btn-primary btn-rounded btn-fw" onclick="show_hide_scrapped_body()">Pokaż/Ukryj uproszczony widok</button>
+                        </div>
+                    </div>
+
+                    <div class="card" id="scrapped_body" style="border: solid black; overflow-x: auto;">
+                      <div class="selector_over">
+                        <div class="card-body" style="cursor: pointer;">
+                          {{website_html | first | safe}}
+                        </div>
+                      </div>
+                    </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 grid-margin stretch-card">
+          <div class="card">
+            <div class="card-body">
+              <div class="template-demo">
+                <div class="card-body">
+                  <h4 class="card-title" style="color: black;">Opcje:</h4>
+                  <br>
+                  {{ form.media }}
+                  {% if form.non_field_errors %}
+                      <h2 class="card-title text-danger">Wykryte błędy w formularzu:</h2>
+                      {% for error in form.non_field_errors %}
+                          <h4 class="card-title text-danger">- {{ error }}</h4>
+                      {% endfor %}
+                      <br>
+                  {% endif %}
+                  <form class="forms-sample" action="" method="post">
+                      {% csrf_token %}
+                      {% for field in form %}
+                          <div class="form-group">
+                              <label class="label" for="{{ field.auto_id }}" style="color: black;">{{ field.label }}</label>
+                              {% if field.label == "Wybrane selektory"%}
+                                <div class = "selectors_management">
+                                  <table class="table table-bordered">
+                                    <thead>
+                                      <tr>
+                                        <th> Typ </th>
+                                        <th> Wartość </th>
+                                        <th> Akcje </th>
+                                      </tr>
+                                    </thead>
+                                    <tbody id="dynamic_body">
+                                    </tbody>
+                                  </table>
+                                </div>
+                              {% endif %}
+                              {{ field }}
+                              {% if field.errors %}
+                                  <p class="help is-danger">{{ field.errors }}</p>
+                              {% endif %}
+                          </div>
+                      {% endfor %}
+                      <input type="submit" class="btn btn-primary mr-2" value="Zapisz">
+                      <a class="btn btn-light" href="{{ view.get_success_url }}">Powrót</a>
+                  </form>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <script>
+      list_of_selector = [];
+    
+      function is_clicked_on_scraped_html(target){
+        tmp = target
+        while(tmp.className != "selector_over"){
+          tmp = tmp.parentElement
+          if(tmp == null){
+            return true;
+          }
+        }
+        return false;
+      }
+
+      function extract_selector(target){
+        // Current selectors:
+        // class_name, id
+      
+        if(is_clicked_on_scraped_html(target)){
+          return {"not_found": true};
+        }
+
+        selector = null;
+        if(target.className || target.id){
+          if(target.className){
+            selector = {"class_name": target.className};  
+          } 
+          if(target.id){
+            selector = {"id": target.id};  
+          } 
+        } else {
+          parent = target.parentElement;
+          if(parent == null){
+            selector = {"not_found": true};
+          }
+          while(selector == null){
+            if(parent.className){
+              selector = {"class_name": parent.className};  
+            } else if(parent.id){
+              selector = {"id": parent.id};  
+            } else {
+              parent = parent.parentElement
+            }
+          }
+        }
+        return selector;
+      }
+    
+      function check_if_selector_already_exists(selector){
+        // Current selectors:
+        // class_name, id
+    
+        if(selector.class_name){
+          type = "class_name";
+          value = selector.class_name;
+        }
+        if(selector.id){
+          type = "id";
+          value = selector.id;
+        }
+        output = true;
+        for(i = 0; i < list_of_selector.length; i++){
+          if(type == "class_name"){
+            if(list_of_selector[i].class_name == selector.class_name){
+              output = false
+              break;
+            }
+          }
+          if(type == "id"){
+            if(list_of_selector[i].id == selector.id){
+              output = false
+              break;
+            }
+          }
+        }
+        return output;
+      }
+    
+      function add_to_selector_list(selector){
+        // Current selectors:
+        // class_name, id
+    
+        if(selector.class_name || selector.id){
+          is_exist = check_if_selector_already_exists(selector)
+          if(is_exist){
+            list_of_selector.push(selector);
+            return "Selector added";
+          } else {
+            return "Selector already exists";
+          }
+        } else {
+          return "Selector not found";
+        }
+      }
+    
+      function delete_selector_from_list(type, value){
+        // Current selectors:
+        // class_name, id
+    
+        for(i = 0; i < list_of_selector.length; i++){
+          if(type == "class_name"){
+            if(list_of_selector[i].class_name == value){
+              list_of_selector.splice(i, 1);
+              return "Deleted"
+            }
+          }
+          if(type == "id"){
+            if(list_of_selector[i].id == value){
+              list_of_selector.splice(i, 1);
+              return "Deleted"
+            }
+          }
+        }
+    
+        return "Element doesn't exist"
+      }
+
+      function show_hide_scrapped_body(){
+        elem = document.getElementById("scrapped_body");
+        if(elem.style.display == ""){
+          elem.style.display = "none";
+          return;
+        }
+        if(elem.style.display == "none"){
+          elem.style.display = "";
+          return;
+        }
+      }
+
+      function generate_selectors_tbody(list_of_selector){
+        rows = ""
+        for (const selector of list_of_selector) {
+          row = `
+            <tr>
+              <td data-label="Typ" >${Object.keys(selector)[0]}</td>
+              <td data-label="Wartość" style="white-space: normal">${Object.values(selector)[0]}</td>
+              <td data-label="Akcje">
+                <span class="icon-bg" onclick="delete_selector_from_list('${Object.keys(selector)[0]}', '${Object.values(selector)[0]}')">
+                  <i class="mdi mdi-delete" style="font-size: 25px; color: red; cursor: pointer;"></i>
+                </span>
+              </td>
+            </tr>
+          `
+          rows += row
+        }
+        return rows;
+      }
+
+      document.addEventListener('click', function(e) {
+        e = e || window.event;
+        var target = e.target || e.srcElement,
+          text = target.textContent || target.innerText;
+
+        field = document.getElementById("id_selectors");
+        body = document.getElementById("dynamic_body");
+
+        selector = extract_selector(target);
+        result = add_to_selector_list(selector);
+        tbody = generate_selectors_tbody(list_of_selector)
+
+        field.value = JSON.stringify(list_of_selector);
+        body.innerHTML = tbody
+      }, false);
+
+      document.getElementById("id_selectors").hidden = true;
+    </script>
+
+{% endblock %}

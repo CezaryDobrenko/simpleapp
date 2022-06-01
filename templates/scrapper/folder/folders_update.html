@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}Edytuj folder{% endblock %}
+{% block content %}
+<div class="row">       
+    <div class="col-md-4 grid-margin stretch-card">
+        <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">KROK 1</h4>
+            <div class="media">
+            <i class="mdi mdi-folder icon-md d-flex align-self-start mr-3"></i>
+            <div class="media-body">
+                <p class="card-text" style="color: black;">
+                <i class="mdi mdi-arrow-down-drop-circle" style="font-size: 22px;"></i>Utwórz folder, w którym zdefiniujesz strony www do pobrania danych.
+                Przejdź do folderu <i class="mdi mdi-settings" style="font-size: 25px; color: #0062ff;"></i> i dokończ proces konfiguracji procesu zbierania danych.
+                </p>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="col-md-4 grid-margin stretch-card">
+        <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">KROK 2</h4>
+            <div class="media">
+            <i class="mdi mdi-timer icon-md text-success d-flex align-self-end mr-3"></i>
+            <div class="media-body">
+                <p class="card-text" style="color: black;">
+                Wybierz interwał czasowy, w którym mają być pobierane dane<i class="mdi mdi-lead-pencil" style="font-size: 25px; color: #0062ff;"></i> i
+                aktywuj ustaw status wybranego folderu na aktywny.
+                </p>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="col-md-4 grid-margin stretch-card">
+        <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">KROK 3</h4>
+            <div class="media">
+            <i class="mdi mdi-eye icon-md d-flex align-self-end mr-3"></i>
+            <div class="media-body">
+                <p class="card-text" style="color: black;">
+                Podgląd danych jest dostępny w widoku listy zdefiniowanych selektorów dla strony www.
+                </p>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+    {% include "base_form.html" %}
+{% endblock %}

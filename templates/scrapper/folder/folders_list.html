@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+{% block title %}Foldery{% endblock %}
+{% block custom_styles %}
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'assets/css/style_responsive_table.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/style_custom_buttons.css' %}">
+{% endblock %}
+{% block content %}
+<div class="row">       
+  <div class="col-md-4 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">KROK 1</h4>
+        <div class="media">
+          <i class="mdi mdi-folder icon-md text-success d-flex align-self-start mr-3"></i>
+          <div class="media-body">
+            <p class="card-text" style="color: black;">
+              <i class="mdi mdi-arrow-down-drop-circle" style="font-size: 22px;"></i>Utwórz folder, w którym zdefiniujesz strony www do pobrania danych.
+              Przejdź do folderu <i class="mdi mdi-settings" style="font-size: 25px; color: #0062ff;"></i> i dokończ proces konfiguracji procesu zbierania danych.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">KROK 2</h4>
+        <div class="media">
+          <i class="mdi mdi-timer icon-md d-flex align-self-end mr-3"></i>
+          <div class="media-body">
+            <p class="card-text" style="color: black;">
+              Wybierz interwał czasowy, w którym mają być pobierane dane <i class="mdi mdi-lead-pencil" style="font-size: 25px; color: #0062ff;"></i> i
+              aktywuj ustaw status wybranego folderu na aktywny.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">KROK 3</h4>
+        <div class="media">
+          <i class="mdi mdi-eye icon-md d-flex align-self-end mr-3"></i>
+          <div class="media-body">
+            <p class="card-text" style="color: black;">
+              Podgląd danych jest dostępny w widoku listy zdefiniowanych selektorów dla strony www.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <div style="margin-bottom: 60px;">
+          <div class="dropdown pull-right">
+            <button type="button" class="btn btn-light dropdown-toggle" id="dropdownMenuIconButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="mdi mdi-arrow-down-drop-circle" style="font-size: 22px;"></i>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuIconButton3" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 39px, 0px);">
+              <h6 class="dropdown-header"></h6>
+              <a style="color: black; font-size: 20px;" class="dropdown-item" href="{% url 'folders-add' %}">
+                <i style="color: #33c92d; font-size: 25px;" class="mdi mdi-plus-circle"></i> Dodaj nowy folder
+              </a>
+            </div>
+          </div>
+        </div>
+        <div style="margin-bottom: 60px;">
+          <h2 style="color: black;">Zdefiniowane foldery:</h2>
+        </div>
+        <div style="overflow-x:auto;">
+            <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th> id </th>
+                    <th> Nazwa </th>
+                    <th> Czy aktywny </th>
+                    <th> Ilość stron www </th>
+                    <th> Interwał wykonania</th>
+                    <th> Data ostatniego wykonania</th>
+                    <th> Data następnego wykonania</th>
+                    <th> Akcje</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% if object_list %}
+                    {% for folder in object_list %}
+                          <tr style="margin-bottom:40px;">
+                            <td data-label="ID"> {{ folder.pk }} </td>
+                            <td data-label="Nazwa"> {{ folder.name }} </td>
+                            <td data-label="Czy aktywny"> {{ folder.is_ready }} </td>
+                            <td data-label="Ilość stron www"> {{ folder.sites }} </td>
+                            <td data-label="Interwał wykonania"> {{ folder.scraping_interval }} </td>
+                            <td data-label="Data ost."> 
+                              {% if folder.is_ready == "Tak" %}
+                                {% if folder.last_scraping %}
+                                  {{ folder.last_scraping }}
+                                {% else %}
+                                  Oczekiwanie na następny cykl
+                                {% endif %}
+                              {% else %}
+                                Proces jest obecnie wyłączony
+                              {% endif %}
+                            </td>
+                            <td data-label="Data nst."> 
+                              {% if folder.is_ready == "Tak" %}
+                                {% if folder.next_scraping %}
+                                  {{ folder.next_scraping }}
+                                {% else %}
+                                  Oczekiwanie na następny cykl
+                                {% endif %}
+                              {% else %}
+                                Proces jest obecnie wyłączony
+                              {% endif %}
+                            </td>
+                            <td class="responsive-length" data-label="Akcje"> 
+                              <a href="{% url 'websites-settings' pk=folder.pk %}">
+                                <span class="icon-bg">
+                                  <i class="mdi mdi-settings" style="margin-left: 10px; font-size: 25px; color: #0062ff;"></i>
+                                </span>
+                              </a>
+
+                              <a href="{% url 'folders-update' pk=folder.pk %}">
+                                <span class="icon-bg">
+                                  <i class="mdi mdi-lead-pencil" style="margin-left: 10px; font-size: 25px; color: #0062ff;"></i>
+                                </span>
+                              </a>
+
+                              <a href="{% url 'folders-delete' pk=folder.pk %}">
+                                <span class="icon-bg">
+                                  <i class="mdi mdi-delete" style="margin-left: 10px; font-size: 25px; color: #0062ff;"></i>
+                                </span>
+                              </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                  {% else %}
+                  <tr>
+                    <td>
+                      Brak folderów
+                    </td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                  </tr>
+                  {% endif %}
+                </tbody>
+              </table>
+        </div>
+        {% include "pagination.html" %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

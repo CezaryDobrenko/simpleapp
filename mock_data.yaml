@@ -1,0 +1,258 @@
+- model: scrapper.user
+  pk: 1
+  fields:
+    password: pbkdf2_sha256$216000$jCpPOvFAD7DB$/MicFmWyiUxEfJI6NZPkkg5EGsytg/XnRA7zegVMFHc=
+    last_login: null
+    is_superuser: true
+    username: supervisor
+    first_name: 'supervisor'
+    last_name: 'supervisor'
+    email: supervisor@supervisor.pl
+    is_staff: true
+    is_active: true
+    date_joined: 2022-06-07 12:11:13.820951+00:00
+    groups: []
+    user_permissions: []
+
+- model: scrapper.timezone
+  pk: 1
+  fields:
+    modified_date: 2022-06-07 12:11:13.820951+00:00
+    name: UTC (Universal Coordinated Time)
+    value: 0
+
+- model: scrapper.timezone
+  pk: 2
+  fields:
+    modified_date: 2022-06-07 12:11:13.820951+00:00
+    name: ECT (European Central Time)
+    value: 1
+
+- model: scrapper.timezone
+  pk: 3
+  fields:
+    modified_date: 2022-06-07 12:11:13.820951+00:00
+    name: ECT (Poland Summer Time)
+    value: 2
+
+- model: scrapper.timezone
+  pk: 4
+  fields:
+    modified_date: 2022-06-07 12:11:13.820951+00:00
+    name: EET (Eastern European Time)
+    value: 2
+
+- model: scrapper.timezone
+  pk: 5
+  fields:
+    modified_date: 2022-06-07 12:11:13.820951+00:00
+    name: ART ((Arabic) Egypt Standard Time)
+    value: 2
+
+- model: scrapper.timezone
+  pk: 6
+  fields:
+    modified_date: 2022-06-07 12:11:13.820951+00:00
+    name: EAT (Eastern African Time)
+    value: 3
+
+- model: scrapper.timezone
+  pk: 7
+  fields:
+    modified_date: 2022-06-07 12:11:13.820951+00:00
+    name: MET (Middle East Time)
+    value: 3.5
+
+- model: scrapper.timezone
+  pk: 8
+  fields:
+    modified_date: 2022-06-07 12:11:13.820951+00:00
+    name: NET (Near East Time)
+    value: 4
+
+- model: scrapper.timezone
+  pk: 9
+  fields:
+    modified_date: 2022-06-07 12:11:13.820951+00:00
+    name: PLT (Pakistan Lahore Time)
+    value: 5
+
+- model: scrapper.timezone
+  pk: 10
+  fields:
+    modified_date: 2022-06-07 12:11:13.820951+00:00
+    name: IST (India Standard Time)
+    value: 5.5
+
+- model: scrapper.timezone
+  pk: 11
+  fields:
+    modified_date: 2022-06-07 12:11:13.820951+00:00
+    name: BST (Bangladesh Standard Time)
+    value: 6
+
+- model: scrapper.timezone
+  pk: 12
+  fields:
+    modified_date: 2022-06-07 12:11:13.820951+00:00
+    name: VST (Vietnam Standard Time)
+    value: 7
+
+- model: scrapper.timezone
+  pk: 13
+  fields:
+    modified_date: 2022-06-07 12:11:13.820951+00:00
+    name: CTT (China Taiwan Time)
+    value: 8
+
+- model: scrapper.timezone
+  pk: 14
+  fields:
+    modified_date: 2022-06-07 12:11:13.820951+00:00
+    name: JST (Japan Standard Time)
+    value: 9
+
+- model: scrapper.timezone
+  pk: 15
+  fields:
+    modified_date: 2022-06-07 12:11:13.820951+00:00
+    name: ACT (Australia Central Time)
+    value: 9.5
+
+- model: scrapper.timezone
+  pk: 16
+  fields:
+    modified_date: 2022-06-07 12:11:13.820951+00:00
+    name: AET (Australia Eastern Time)
+    value: 10
+
+- model: scrapper.timezone
+  pk: 17
+  fields:
+    modified_date: 2022-06-07 12:11:13.820951+00:00
+    name: SST (Solomon Standard Time)
+    value: 11
+
+- model: scrapper.timezone
+  pk: 18
+  fields:
+    modified_date: 2022-06-07 12:11:13.820951+00:00
+    name: NST (New Zealand Standard Time)
+    value: 12
+
+- model: scrapper.timezone
+  pk: 19
+  fields:
+    modified_date: 2022-06-07 12:11:13.820951+00:00
+    name: MIT (Midway Islands Time)
+    value: -11
+
+- model: scrapper.timezone
+  pk: 20
+  fields:
+    modified_date: 2022-06-07 12:11:13.820951+00:00
+    name: HST (Hawaii Standard Time)
+    value: -10
+
+- model: scrapper.timezone
+  pk: 21
+  fields:
+    modified_date: 2022-06-07 12:11:13.820951+00:00
+    name: AST (Alaska Standard Time)
+    value: -9
+
+- model: scrapper.timezone
+  pk: 22
+  fields:
+    modified_date: 2022-06-07 12:11:13.820951+00:00
+    name: PST (Pacific Standard Time)
+    value: -8
+
+- model: scrapper.timezone
+  pk: 23
+  fields:
+    modified_date: 2022-06-07 12:11:13.820951+00:00
+    name: PNT (Phoenix Standard Time)
+    value: -7
+
+- model: scrapper.timezone
+  pk: 24
+  fields:
+    modified_date: 2022-06-07 12:11:13.820951+00:00
+    name: CST (Central Standard Time)
+    value: -6
+
+- model: scrapper.timezone
+  pk: 25
+  fields:
+    modified_date: 2022-06-07 12:11:13.820951+00:00
+    name: EST (Eastern Standard Time)
+    value: -5
+
+- model: scrapper.timezone
+  pk: 26
+  fields:
+    modified_date: 2022-06-07 12:11:13.820951+00:00
+    name: IET (Indiana Eastern Standard Time)
+    value: -5
+
+- model: scrapper.timezone
+  pk: 27
+  fields:
+    modified_date: 2022-06-07 12:11:13.820951+00:00
+    name: PRT (Puerto Rico and US Virgin Islands Time)
+    value: -4
+
+- model: scrapper.timezone
+  pk: 28
+  fields:
+    modified_date: 2022-06-07 12:11:13.820951+00:00
+    name: CNT (Canada Newfoundland Time)
+    value: -3.5
+
+- model: scrapper.timezone
+  pk: 29
+  fields:
+    modified_date: 2022-06-07 12:11:13.820951+00:00
+    name: BET (Brazil Eastern Time)
+    value: -3
+
+- model: scrapper.timezone
+  pk: 30
+  fields:
+    modified_date: 2022-06-07 12:11:13.820951+00:00
+    name: AGT (Argentina Standard Time)
+    value: -3
+
+- model: scrapper.timezone
+  pk: 31
+  fields:
+    modified_date: 2022-06-07 12:11:13.820951+00:00
+    name: CAT (Central African Time)
+    value: -1
+
+- model: scrapper.selectortype
+  pk: 1
+  fields:
+    name: 'id'
+    description: 'Element DOM zawierający selektor id'
+    created_date: 2020-01-01 13:00:00+00:00
+    modified_date: 2020-01-01 13:00:00+00:00
+
+- model: scrapper.selectortype
+  pk: 2
+  fields:
+    name: 'class'
+    description: 'Element DOM zawierający selektor class'
+    created_date: 2020-01-01 13:00:00+00:00
+    modified_date: 2020-01-01 13:00:00+00:00
+    
+- model: scrapper.selectortype
+  pk: 3
+  fields:
+    name: 'tag'
+    description: 'Elementy DOM wybranego znacznika np: <p>, <div> itp...'
+    created_date: 2020-01-01 13:00:00+00:00
+    modified_date: 2020-01-01 13:00:00+00:00
+
+

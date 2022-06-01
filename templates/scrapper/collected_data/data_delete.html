@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Usuń zebraną daną{% endblock %}
+{% block content %}
+<div class="d-flex ">
+    <div class="row flex-grow">
+      <div class="col-lg-4 mx-auto">
+        <div class="auth-form-light text-left p-5">
+            <div class="text-left p-5">
+                <div class="mt-3">
+                    <i class="mdi mdi-alert" style="font-size: 100px; color: red;"></i>
+                </div>
+                <br>
+                <h4 style="color: black; min-width: 190px;">Czy jesteś pewien, że chcesz usunąć ten wpis?</h4>
+                <h6 style="color: black; min-width: 190px;" class="font-weight-dark">Tej akcji nie da się cofnąć!</h6>
+                <br>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mt-3">
+                        <input type="submit" class="btn btn-block btn-danger btn-lg font-weight-medium auth-form-btn" style="min-width: 190px;" value="Potwierdź">
+                    </div>
+                    <div class="mt-3">
+                        <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" style="min-width: 190px;" href="{{ view.get_success_url }}">Powrót</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,26 @@
+<div class="card-body">
+    <h4 class="card-title" style="color: black;">Formularz edycji</h4>
+    <br>
+    {{ form.media }}
+    {% if form.non_field_errors %}
+        <h2 class="card-title text-danger">Wykryte błędy w formularzu:</h2>
+        {% for error in form.non_field_errors %}
+            <h4 class="card-title text-danger">- {{ error }}</h4>
+        {% endfor %}
+        <br>
+    {% endif %}
+    <form class="forms-sample" action="" method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form-group">
+                <label class="label" for="{{ field.auto_id }}" style="color: black;">{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}
+                    <p class="help is-danger">{{ field.errors }}</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+        <input type="submit" class="btn btn-primary mr-2" value="Zapisz">
+        <a class="btn btn-light" href="{{ view.get_success_url }}">Powrót</a>
+    </form>
+</div>

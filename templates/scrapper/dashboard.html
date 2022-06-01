@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% block title %}Panel główny{% endblock %}
+{% load static %}
+{% block content %}
+<div class="row">
+  <div class="col-md-6 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Witaj w systemie SCRAPPERHUB</h4>
+        <img src="{% static 'assets/images/mascot.png' %}" style="width: 50%; margin-left: 25%;">
+        <hr>
+        <p style = "color: black; font-size: 15px; text-align: center; margin-top: 20px;">
+          Jedyny darmowy system pozwalający na automatyzację procesu pobierania danych za 
+          pośrednictwem graficznego interfejsu użytkownika!
+        </p>
+        <hr>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 d-flex align-items-stretch">
+    <div class="row">
+      <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Data ostatniej przerwy technicznej (Zmiana dostawcy usług hostingowych)</h4>
+            <div class="row">
+              <div class="col-md-4 d-flex align-items-center">
+                <div class="d-flex flex-row align-items-center">
+                  <i class="mdi mdi-calendar icon-lg text-success"></i>
+                  <p class="mb-0 ml-1" style="font-size: 24px;"> 22.04.2022 </p>
+                </div>
+              </div>
+            </div>
+            <br>
+            <p class="card-description" style="color: black"> Zmiany: </p>
+            <p style="color: black"> 
+              - Poprawa błędów zgłoszonych przez beta testerów<br>
+              - Poprawa stabilności działania systemu<br>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Status systemu</h4>
+            <div class="row">
+              <div class="col-md-4 d-flex align-items-center">
+                <div class="d-flex flex-row align-items-center">
+                  <i class="mdi mdi-server icon-lg text-success"></i>
+                  <p class="mb-0 ml-1" style="font-size: 33px;"> Aktywny </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">  
+  <div class="col-md-4 grid-margin stretch-card" style="color: black;">
+    <b>Statystyki serwisu:</b>
+  </div>
+</div>
+<div class="row">       
+  <div class="col-md-4 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Liczba folderów założonych w systemie</h4>
+        <div class="media">
+          <i class="mdi mdi-star-circle text-success icon-md d-flex align-self-end mr-3">
+              <span style="font-size: 55px;">{{folders_count}}</span>
+          </i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Liczba stron internetowych do pobierania danych</h4>
+        <div class="media">
+          <i class="mdi mdi-star-circle text-success icon-md d-flex align-self-end mr-3">
+              <span style="font-size: 55px;">{{websites_count}}</span>
+          </i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Liczba zebranych danych przez użytkowników</h4>
+        <div class="media">
+          <i class="mdi mdi-star-circle text-success icon-md d-flex align-self-end mr-3">
+              <span style="font-size: 55px;">{{data_count}}</span>
+          </i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

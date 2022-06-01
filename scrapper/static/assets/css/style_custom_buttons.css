@@ -1,0 +1,34 @@
+.custom_button_left{
+    float: left;
+    margin-right: 5px;
+}
+
+.custom_button_right{
+    float: right;
+    margin-left: 15px;
+}
+
+@media screen and (max-width: 1200px) {
+    .responsive_span{
+        display: none !important;
+    }
+    #page{
+        display: none !important;
+    }
+}
+
+@media screen and (max-width: 770px) {
+    .custom_button_left{
+        width: 100%;
+        margin-top: 5px;
+    }
+
+    .custom_button_right{
+        width: 100%;
+        margin-top: 5px;
+    }
+
+    .card-resposive{
+        display: none;
+    }
+}

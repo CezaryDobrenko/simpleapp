@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Misja{% endblock %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <div class="card-body">
+        <blockquote class="blockquote blockquote-primary">
+          <p style="font-size: 22px; color: black;">&ldquo;Informacja jest źródłem nauki. Ale jeśli nie jest zorganizowana, przetworzona i dostępna dla właściwych osób we właściwym formacie umożliwiającym podejmowanie decyzji, jest obciążeniem, a nie korzyścią.&rdquo;</p>
+          <footer class="blockquote-footer">William Pollard</footer>
+        </blockquote>
+    </div>
+        <div class="col-md-6 grid-margin stretch-card">
+          <div class="card">
+            <div class="card-body">
+              <img class="image_wcag" style="width: 50%; margin-left: 25%;" src="{% static 'assets/images/mission.png' %}">
+              <h4 class="card-title">Misja</h4>
+              <p style="color: black; font-size: 22px;">
+                <b>
+                  Misją platformy SCRAPPERHUB jest zapewnianie darmowego narzędzia do pobierania i udostępniania
+                  danych ze zdefiniowanych przez użytkownika stron internetowych. Proces został uproszczony do
+                  stanu, w którym użytkownik przy pomocy kreatora w ciągu kilku minut jest w stanie uruchomić
+                  proces i pobierać dane ze zdefiniowanej strony internetowej.
+                </b>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 grid-margin stretch-card">
+          <div class="card">
+            <div class="card-body">
+              <img class="image_wcag" style="width: 50%; margin-left: 25%;" src="{% static 'assets/images/goals.png' %}">
+              <h4 class="card-title">Cele</h4>
+              <div class="template-demo">
+                <h3 style="color: black;"> - Organizacja informacji. </h3>
+                <h3 style="color: black;"> - Łatwy dostęp do zebranych zasobów. </h3>
+                <h3 style="color: black;"> - Prostota i przejrzystość procesu. </h3>
+                <h3 style="color: black;"> - Bezpłatny dostęp do oferowanych zasobów. </h3>
+                <h3 style="color: black;"> - Informacje o nowych na każdym etapie procesu. </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+</div>
+{% endblock %}
