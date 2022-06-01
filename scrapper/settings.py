@@ -19,7 +19,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("DJANGO_SECRET", "DS@RWSFR!%@#^SFZXes#afasfcz$#412e")
+SECRET_KEY = "%tvdn&f2wahsz&gapfjnn84w=h_%%$32zu4-n+ayr^a)@wjwyx"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -148,8 +148,8 @@ APP_LABEL = "scrapper"
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
-EMAIL_HOST_USER = os.environ.get("SMTP_EMAIL")
-EMAIL_HOST_PASSWORD = os.environ.get("SMTP_PASSWORD")
+EMAIL_HOST_USER = "noreply.scrapperhub@gmail.com"
+EMAIL_HOST_PASSWORD = "saetndlufshykbvj"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = os.environ.get("SMTP_EMAIL")
+DEFAULT_FROM_EMAIL = "noreply.scrapperhub@gmail.com"
