@@ -11,7 +11,6 @@ from scrapper.models.selectors import Selector
 from scrapper.models.timezone import Timezone
 from scrapper.models.user import User
 from scrapper.models.website import Website
-import time
 
 
 class RequestFactory:
