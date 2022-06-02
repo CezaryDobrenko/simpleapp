@@ -16,7 +16,7 @@ def calculate_new_scrape_date(last_scraping: str, interval: str) -> tuple:
     if next_scrape_date is None:
         is_valid = True
         new_date = now
-    elif now > next_scrape_date:
+    elif now >= next_scrape_date:
         is_valid = True
         new_date = now
     else:
