@@ -14,6 +14,22 @@
     groups: []
     user_permissions: []
 
+- model: scrapper.user
+  pk: 2
+  fields:
+    password: pbkdf2_sha256$216000$VxO1LBqH3uWs$7b98P7Hch0PnWO+5zWkNfHvN/19PL1oazvL2KC8D/rc=
+    last_login: null
+    is_superuser: false
+    username: user
+    first_name: 'user'
+    last_name: 'user'
+    email: user@user.pl
+    is_staff: false
+    is_active: true
+    date_joined: 2022-06-07 12:11:13.820951+00:00
+    groups: []
+    user_permissions: []
+
 - model: scrapper.timezone
   pk: 1
   fields:
