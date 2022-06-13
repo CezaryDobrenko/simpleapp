@@ -19,7 +19,8 @@ class Export:
             for selector in Selector.objects.filter(website_id=website.id):
                 output += f"\t{selector.selector_type.name}:{selector.value}\n"
                 for item in CollectedData.objects.filter(selector_id=selector.id):
-                    output += f"\t\t{item.value}\n"
+                    parsed_item = item.value.strip().replace('\n', '')
+                    output += f"\t\t{parsed_item}\n"
             output += "\n"
         return output
 
@@ -30,7 +31,8 @@ class Export:
             for selector in Selector.objects.filter(website_id=website.id):
                 output[website.url][selector.value] = []
                 for item in CollectedData.objects.filter(selector_id=selector.id):
-                    output[website.url][selector.value].append(item.value)
+                    parsed_item = item.value.strip().replace('\n', '')
+                    output[website.url][selector.value].append(parsed_item)
         return json.dumps(output)
 
     def export_as_xml(self) -> str:
@@ -40,10 +42,11 @@ class Export:
             for selector in Selector.objects.filter(website_id=website.id):
                 output[website.url][selector.value] = []
                 for item in CollectedData.objects.filter(selector_id=selector.id):
-                    if json_item := self.__is_json(item.value):
+                    parsed_item = item.value.strip().replace('\n', '')
+                    if json_item := self.__is_json(parsed_item):
                         output[website.url][selector.value].append(json_item)
                     else:
-                        output[website.url][selector.value].append(item.value)
+                        output[website.url][selector.value].append(parsed_item)
         xml = dicttoxml(loads(json.dumps(output)))
         return xml
 
@@ -52,9 +55,9 @@ class Export:
         for website in Website.objects.filter(folder_id=self.folder_id, is_ready=True):
             output += f"{website.url}\n"
             for selector in Selector.objects.filter(website_id=website.id):
-                output += f"{selector.selector_type.name}-{selector.value}\n"
+                output += f"{selector.selector_type.name.strip()}-{selector.value.strip()}\n"
                 for item in CollectedData.objects.filter(selector_id=selector.id):
-                    parsed = item.value.replace(",", ".")
+                    parsed = item.value.replace(",", ".").strip().replace('\n', '')
                     output += f"{parsed},\n"
                 output += "\n\n"
         return output

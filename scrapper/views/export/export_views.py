@@ -31,7 +31,6 @@ class ExportJSON(LoginRequiredMixin, ListView):
         response = JsonResponse(parsed_json_data)
         response["Content-Type"] = "text/html; charset=utf-8"
         response["Content-Disposition"] = 'attachment; filename="expoted_data.json"'
-        response.write(codecs.BOM_UTF8)
         return response
 
 
@@ -42,7 +41,6 @@ class ExportTXT(LoginRequiredMixin, ListView):
         response = HttpResponse(data)
         response["Content-Type"] = "text/html; charset=utf-8"
         response["Content-Disposition"] = 'attachment; filename="expoted_data.txt"'
-        response.write(codecs.BOM_UTF8)
         return response
 
 
@@ -53,7 +51,6 @@ class ExportXML(LoginRequiredMixin, View):
         response = HttpResponse(data)
         response["Content-Type"] = "text/html; charset=utf-8"
         response["Content-Disposition"] = 'attachment; filename="expoted_data.xml"'
-        response.write(codecs.BOM_UTF8)
         return response
 
 
@@ -64,5 +61,4 @@ class ExportCSV(LoginRequiredMixin, View):
         response = HttpResponse(data)
         response["Content-Type"] = "text/csv; charset=utf-8"
         response["Content-Disposition"] = 'attachment; filename="expoted_data.csv"'
-        response.write(codecs.BOM_UTF8)
         return response
